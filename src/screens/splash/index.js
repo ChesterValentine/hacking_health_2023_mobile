@@ -21,6 +21,7 @@ export default function Splash({navigation}) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Splash</Text>
+      
     </View>
   );
 }

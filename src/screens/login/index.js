@@ -67,24 +67,25 @@ export default function Login({navigation}) {
   };
 
   const handleLogin = () => {
-    const checkPassowrd = checkPasswordValidity(password);
-    if (!checkPassowrd) {
-      user_login({
-        email: email.toLocaleLowerCase(),
-        password: password,
-      })
-        .then(result => {
-          if (result.status == 200) {
-            AsyncStorage.setItem('AccessToken', result.data.access_token);
-            navigation.replace('Home');
-          }
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    } else {
-      alert(checkPassowrd);
-    }
+    navigation.navigate('Home');
+    // const checkPassowrd = checkPasswordValidity(password);
+    // if (!checkPassowrd) {
+    //   user_login({
+    //     email: email.toLocaleLowerCase(),
+    //     password: password,
+    //   })
+    //     .then(result => {
+    //       if (result.status == 200) {
+    //         AsyncStorage.setItem('AccessToken', result.data.access_token);
+    //         navigation.replace('Home');
+    //       }
+    //     })
+    //     .catch(err => {
+    //       console.error(err);
+    //     });
+    // } else {
+    //   alert(checkPassowrd);
+    // }
   };
 
   return (
