@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import Select2 from 'react-native-select-two';
 import { useNavigation } from '@react-navigation/native';
+import {get_pays} from '../../api/pays_api';
 
 
-const mockData = [
-  { id: 1, name: "Sénégal", checked: false },
-]
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [countries, setCountries] = useState([]);
 
+  useEffect(() => {
+    get_pays().then((result) => {
+      setCountries(result.data.map((p) => {
+        return {id: p.id, name: p.nom}
+      }));
+    });
+  })
   return (
     
 <View style={styles.container}>
@@ -26,10 +32,13 @@ export default function Home() {
         colorTheme="blue"
         popupTitle="Recherche"
         title="Recherchez une information"
-        data={mockData}
+        data={countries}
         selectedItem={selectedItem}
         onSelect={(data) => {
-          console.log(data)
+          console.log(data);
+        }}
+        onRemoveItem={(data) => {
+          console.log(data);
         }}
       />
     </View>
