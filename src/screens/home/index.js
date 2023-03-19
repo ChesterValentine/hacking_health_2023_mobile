@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import Select2 from 'react-native-select-two';
-import { useNavigation } from '@react-navigation/native';
 import {get_pays} from '../../api/pays_api';
 
 
 
-export default function Home() {
+export default function Home({navigation}) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [countries, setCountries] = useState([]);
 
+  const goToCountry = (id) => {
+    navigation.navigate('Country', {
+        id: id,
+    });
+  }
   useEffect(() => {
     get_pays().then((result) => {
       setCountries(result.data.map((p) => {
         return {id: p.id, name: p.nom}
       }));
     });
-  })
+  }, []);
   return (
     
 <View style={styles.container}>
@@ -33,9 +37,9 @@ export default function Home() {
         popupTitle="Recherche"
         title="Recherchez une information"
         data={countries}
-        selectedItem={selectedItem}
+        selectedItem={countries}
         onSelect={(data) => {
-          console.log(data);
+            goToCountry(data[0]);
         }}
         onRemoveItem={(data) => {
           console.log(data);

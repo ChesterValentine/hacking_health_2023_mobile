@@ -5,17 +5,13 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 export default function Splash({navigation}) {
   useEffect(() => {
     setTimeout(() => {
-      handleGetToken();
+      navigation.navigate('Home');
     }, 3000);
   });
 
   const handleGetToken = async () => {
     const dataToken = await AsyncStorage.getItem('AccessToken');
-    if (!dataToken) {
-      navigation.replace('Login');
-    } else {
       navigation.replace('Home');
-    }
   };
 
   return (
