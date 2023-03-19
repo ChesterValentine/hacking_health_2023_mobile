@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'grey',
+    backgroundColor: 'green',
     borderRadius: 5,
     marginTop: 25,
   },
